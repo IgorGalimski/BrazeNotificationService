@@ -38,6 +38,9 @@ namespace Appboy.NotificationSerivice.Editor
                 notificationServicePlist.WriteToFile (notificationServicePlistPath);
 
                 var notificationServiceTarget = PBXProjectExtensions.AddAppExtension (proj, targetGUID, "notificationservice", PlayerSettings.GetApplicationIdentifier (BuildTargetGroup.iOS) + ".bknotificationservice", notificationServicePlistPath);
+                
+                proj.AddHeadersBuildPhase(notificationServiceTarget);
+                
                 proj.AddFileToBuild (notificationServiceTarget, proj.AddFile (PathToNotificationService + "/NotificationService.h", "NotificationService/NotificationService.h"));
                 proj.AddFileToBuild (notificationServiceTarget, proj.AddFile (PathToNotificationService + "/NotificationService.m", "NotificationService/NotificationService.m"));
                 proj.AddFrameworkToProject (notificationServiceTarget, "NotificationCenter.framework", true);
